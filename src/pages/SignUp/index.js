@@ -42,7 +42,7 @@ const Page = () => {
         console.log(json);
 
         if (json.error) {            
-            setError(json.error);
+            setError(json.error);            
         } 
         else {
             doLogin(json.token);

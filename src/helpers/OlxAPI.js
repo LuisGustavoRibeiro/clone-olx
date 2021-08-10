@@ -59,12 +59,21 @@ const OlxAPI = {
         return json;
     },
 
-    register:async (name, email, passoword, stateLoc) => {
-        const json = await apiFetchPost(
-            '/user/signup',
-            {name, email, passoword, state:stateLoc}
-        );
-        return json;
+    // register:async (name, email, passoword, stateLoc) => {
+    //     const json = await apiFetchPost(
+    //         '/user/signup',
+    //         {name, email, passoword, state:stateLoc}
+    //     );
+    //     return json;
+    // },
+
+    register: async (name, email, passoword, stateLoc) => {
+        return apiFetchPost('/user/signup', {
+            name,
+            email,
+            passoword,
+            state: stateLoc,
+        });
     },
 
     getStates:async () => {
@@ -72,6 +81,13 @@ const OlxAPI = {
             '/states'
         );
         return json.states;
+    },
+
+    getCategories:async () => {
+        const json = await apiFetchGet(
+            '/categories'
+        );
+        return json.categories;
     }
 
 };

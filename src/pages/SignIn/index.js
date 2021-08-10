@@ -21,10 +21,8 @@ const Page = () => {
 
         const json = await api.login(email, passoword);
 
-        //console.log(json);
-        if (json.json.error) {
-            alert('caiu:' + json.json.error);
-            setError(json.json.error);
+        if (json.error) {
+            setError(json.error);
         } 
         else {
             doLogin(json.token, rememberPassword);
