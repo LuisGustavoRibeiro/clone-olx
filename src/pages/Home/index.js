@@ -4,12 +4,14 @@ import { PageArea, SearchArea } from './styled';
 import UseAPI from '../../helpers/OlxAPI'
 
 import { PageContainer } from '../../components/MainComponents';
+import AdItem from '../../components/partials/AdItem';
 
 const Page = () => {
     const api = UseAPI();
 
     const [stateList, setSateLlist] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [adList, setAdList] = useState([]);
 
     useEffect(() => {
         const getStates = async () => {
@@ -25,6 +27,18 @@ const Page = () => {
             setCategories(cats);
         }
         getCategories();
+    }, []);
+
+    useEffect(() => {
+        const getRecentAds = async () => {
+            const json = await api.getAds({
+                sort:'desc',
+                limit:8
+            });
+            console.log(json.ads);
+            setAdList(json.ads);
+        }        
+        getRecentAds();
     }, []);
 
     return (
@@ -54,7 +68,18 @@ const Page = () => {
             </SearchArea>
             <PageContainer>           
                 <PageArea>
-                    ...
+                    <h2>Anúncios Recentes</h2>
+                    <div className="list">
+                        {adList.map((i,key)=>
+                            <AdItem key={key} data={i}/>
+                        )}
+                    </div>
+                    <Link to="/ads" className="seeAllLink">Ver todos</Link>
+
+                    <hr/>
+
+                    aspkdpkasdapdkpakdpokapodkpoadkpoakpodkpasodkpoakdpoakdpksadpoakdpokdpoakadkpoadkpoakdpoakdpakdkadkpakdpoakdpkasdpkadkapdokapsodkpoaskd
+                    aspkdpkasdapdkpakdpokapodkpoadkpoakpodkpasodkpoakdpoakdpksadpoakdpokdpoakadkpoadkpoakdpoakdpakdkadkpakdpoakdpkasdpkadkapdokapsodkpoaskd
                 </PageArea>
             </PageContainer>
         </>
